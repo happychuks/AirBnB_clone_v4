@@ -7,7 +7,7 @@ distributes an archive to the web servers
 from fabric.api import env, local, put, run
 from datetime import datetime
 from os.path import exists, isdir
-env.hosts = ['52.91.147.33', '34.202.164.67']
+env.hosts = ['100.26.173.95', '35.168.2.158']
 env.user = 'ubuntu'
 env.key_filename = '~/.ssh/id_rsa'
 
