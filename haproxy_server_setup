@@ -17,8 +17,8 @@ frontend  happychuks-frontend
         default_backend happychuks-backend
 backend happychuks-backend
         balance roundrobin
-        server 146076-web-01 100.26.173.95:80 check
-        server 146076-web-02 35.168.2.158:80 check
+        server 146076-web-01 54.175.200.255:80 check
+        server 146076-web-02 100.25.21.215:80 check
 "
 echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
