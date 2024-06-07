@@ -1,175 +1,161 @@
-# AirBnB Clone - The Console
+# AirBnB Clone - Web Dynamic
+![Project Architechture](https://s3.amazonaws.com/intranet-projects-files/concepts/74/hbnb_step5.png)
 
-The console is the first segment of the AirBnB project at Holberton School that will collectively cover fundamental concepts of higher level programming. The goal of AirBnB project is to eventually deploy our server a simple copy of the AirBnB Website(HBnB). A command interpreter is created in this segment to manage objects for the AirBnB(HBnB) website.
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Project Overview](#project-overview)
+3. [Technologies Used](#technologies-used)
+4. [Front-end](#front-end)
+    - [HTML5](#html5)
+    - [CSS](#css)
+    - [JavaScript](#javascript)
+5. [Back-end](#back-end)
+    - [Python Flask Framework](#python-flask-framework)
+    - [Restful API](#restful-api)
+6. [Database](#database)
+    - [MySQL](#mysql)
+    - [SQLAlchemy ORM](#sqlalchemy-orm)
+7. [Server Configuration](#server-configuration)
+    - [Ubuntu 20.04 LTS](#ubuntu-2004-lts)
+    - [Nginx](#nginx)
+    - [HAproxy (Load Balancer)](#haproxy-load-balancer)
+8. [Monitoring](#monitoring)
+    - [Datadog](#datadog)
+9. [Installation and Setup](#installation-and-setup)
+10. [Project Structure](#project-structure)
+11. [Bugs](#bugs)
+12. [Authors](#authors)
+13. [License](#license)
 
-## Functionalities of this command interpreter:
+## Introduction
+This project is a clone of the AirBnB platform, built to demonstrate a full-stack web application using modern technologies. The project includes a front-end developed with HTML5, CSS, and JavaScript, a back-end using the Python Flask framework, and a MySQL database managed through SQLAlchemy ORM. The application is deployed on an Ubuntu server, with Nginx and HAproxy for load balancing, and monitored using Datadog.
 
-- Create a new object (ex: a new User or a new Place)
-- Retrieve an object from a file, a database etc...
-- Do operations on objects (count, compute stats, etc...)
-- Update attributes of an object
-- Destroy an object
+## Project Overview
+The AirBnB Clone - Web Dynamic is the fourth segment of the AirBnB project at ALX / Holberton School that will collectively cover fundamental concepts of higher level programming. The goal of AirBnB project is to eventually deploy into our server a simple copy of the AirBnB Website.
 
-## Table of Content
+## Technologies Used
+- **Front-end:** HTML5, CSS, JavaScript
+- **Back-end:** Python Flask framework, Restful API
+- **Database:** MySQL
+- **ORM:** SQLAlchemy ORM
+- **Server:** Ubuntu 20.04 LTS, Nginx, HAproxy
+- **Monitoring:** Datadog
 
-- [Environment](#environment)
-- [Installation](#installation)
-- [File Descriptions](#file-descriptions)
-- [Usage](#usage)
-- [Examples of use](#examples-of-use)
-- [Bugs](#bugs)
-- [Authors](#authors)
-- [License](#license)
+## Front-end
 
-## Environment
+### HTML5
+HTML5 is used for structuring the web pages. It provides the semantic elements to create a well-organized document structure.
 
-This project is interpreted/tested on Ubuntu 20.04 LTS using python3 (version 3.4.3)
+### CSS
+CSS is used for styling the web pages, ensuring a responsive and visually appealing design across different devices and screen sizes.
 
-## Installation
+### JavaScript
+JavaScript is employed for dynamic interactions and client-side logic, enhancing the user experience through features like form validation, asynchronous requests, and interactive elements.
 
-- Clone this repository: `git clone "https://github.com/happychuks/AirBnB_clone_v3.git"`
-- Access AirBnb directory: `cd AirBnB_clone_v3`
-- Run hbnb(interactively): `./console` and enter command
-- Run hbnb(non-interactively): `echo "<command>" | ./console.py`
+## Back-end
 
-## File Descriptions
+### Python Flask Framework
+Flask is a lightweight WSGI web application framework in Python. It is used to build the back-end of the application, handling routing, templating, and serving static files.
 
-[console.py](console.py) - the console contains the entry point of the command interpreter.
-List of commands this console current supports:
+### Restful API
+The Restful API is designed to handle CRUD operations for different resources such as users, properties, bookings, and reviews. It follows REST principles, ensuring a stateless and scalable architecture.
 
-- `EOF` - exits console
-- `quit` - exits console
-- `<emptyline>` - overwrites default emptyline method and does nothing
-- `create` - Creates a new instance of`BaseModel`, saves it (to the JSON file) and prints the id
-- `destroy` - Deletes an instance based on the class name and id (save the change into the JSON file).
-- `show` - Prints the string representation of an instance based on the class name and id.
-- `all` - Prints all string representation of all instances based or not on the class name.
-- `update` - Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file).
+## Database
 
-### `models/` directory contains classes used for this project:
+### MySQL
+MySQL is a relational database management system used to store and manage the application's data. It is chosen for its reliability, scalability, and ease of use.
 
-[base_model.py](/models/base_model.py) - The BaseModel class from which future classes will be derived
+### SQLAlchemy ORM
+SQLAlchemy is an ORM for Python that provides a high-level abstraction for database interactions. It is used to map Python classes to database tables and manage database sessions.
 
-- `def __init__(self, *args, **kwargs)` - Initialization of the base model
-- `def __str__(self)` - String representation of the BaseModel class
-- `def save(self)` - Updates the attribute `updated_at` with the current datetime
-- `def to_dict(self)` - returns a dictionary containing all keys/values of the instance
+## Server Configuration
 
-Classes inherited from Base Model:
+### Ubuntu 20.04 LTS
+Ubuntu 20.04 LTS is the operating system used for deploying the application. It is a popular choice for servers due to its stability, security, and support for a wide range of software.
 
-- [amenity.py](/models/amenity.py)
-- [city.py](/models/city.py)
-- [place.py](/models/place.py)
-- [review.py](/models/review.py)
-- [state.py](/models/state.py)
-- [user.py](/models/user.py)
+### Nginx
+Nginx is used as a web server and reverse proxy server. It is configured to serve static files, handle incoming requests, and forward them to the Flask application.
 
-### `/models/engine` directory contains File Storage class that handles JASON serialization and deserialization :
+### HAproxy (Load Balancer)
+HAproxy is used as a load balancer to distribute incoming traffic across multiple instances of the application, ensuring high availability and reliability.
 
-[file_storage.py](/models/engine/file_storage.py) - serializes instances to a JSON file & deserializes back to instances
+## Monitoring
 
-- `def all(self)` - returns the dictionary \_\_objects
-- `def new(self, obj)` - sets in \_\_objects the obj with key <obj class name>.id
-- `def save(self)` - serializes **objects to the JSON file (path: **file_path)
-- ` def reload(self)` - deserializes the JSON file to \_\_objects
+### Datadog
+Datadog is a monitoring and analytics platform used to track the application's performance and health. It provides insights into server metrics, application logs, and error tracking.
 
-### `/tests` directory contains all unit test cases for this project:
+## Installation and Setup
+1. **Clone the repository:**
+    ```sh
+    git clone https://github.com/happychuks/AirBnB_clone_v4.git
+    cd AirBnB_clone_v4
+    ```
 
-[/test_models/test_base_model.py](/tests/test_models/test_base_model.py) - Contains the TestBaseModel and TestBaseModelDocs classes
-TestBaseModelDocs class:
+2. **Set up the virtual environment:**
+    ```sh
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
 
-- `def setUpClass(cls)`- Set up for the doc tests
-- `def test_pep8_conformance_base_model(self)` - Test that models/base_model.py conforms to PEP8
-- `def test_pep8_conformance_test_base_model(self)` - Test that tests/test_models/test_base_model.py conforms to PEP8
-- `def test_bm_module_docstring(self)` - Test for the base_model.py module docstring
-- `def test_bm_class_docstring(self)` - Test for the BaseModel class docstring
-- `def test_bm_func_docstrings(self)` - Test for the presence of docstrings in BaseModel methods
+3. **Install the dependencies:**
+    ```sh
+    pip3 install -r requirements.txt
+    ```
 
-TestBaseModel class:
+4. **Configure the database:**
+    - Install MySQL and create a database.
+    - Update the database connection settings in the configuration file.
 
-- `def test_is_base_model(self)` - Test that the instatiation of a BaseModel works
-- `def test_created_at_instantiation(self)` - Test created_at is a pub. instance attribute of type datetime
-- `def test_updated_at_instantiation(self)` - Test updated_at is a pub. instance attribute of type datetime
-- `def test_diff_datetime_objs(self)` - Test that two BaseModel instances have different datetime objects
+5. **Start the API:**
+    ```sh
+    python3 -m api.v1.app #API entry point
+    #on another terminal run:
+    curl -s -XGET http://0.0.0.0:5000/<pageName>/ 
+    ```
 
-[/test_models/test_amenity.py](/tests/test_models/test_amenity.py) - Contains the TestAmenityDocs class:
+6. **Start the application:**
+    ```sh
+    python3 -m web_dynamic.<pageName>
+     #on another terminal run:
+    curl -s -XGET http://0.0.0.0:5000/<pageName>/ 
+    ```
 
-- `def setUpClass(cls)` - Set up for the doc tests
-- `def test_pep8_conformance_amenity(self)` - Test that models/amenity.py conforms to PEP8
-- `def test_pep8_conformance_test_amenity(self)` - Test that tests/test_models/test_amenity.py conforms to PEP8
-- `def test_amenity_module_docstring(self)` - Test for the amenity.py module docstring
-- `def test_amenity_class_docstring(self)` - Test for the Amenity class docstring
+7. **Set up Nginx and HAproxy:**
+    - Configure Nginx to serve the application and handle static files.
+    - Configure HAproxy to load balance the traffic.
 
-[/test_models/test_city.py](/tests/test_models/test_city.py) - Contains the TestCityDocs class:
+8. **Set up Datadog:**
+    - Install the Datadog agent on the server.
+    - Configure the agent to monitor the application.
 
-- `def setUpClass(cls)` - Set up for the doc tests
-- `def test_pep8_conformance_city(self)` - Test that models/city.py conforms to PEP8
-- `def test_pep8_conformance_test_city(self)` - Test that tests/test_models/test_city.py conforms to PEP8
-- `def test_city_module_docstring(self)` - Test for the city.py module docstring
-- `def test_city_class_docstring(self)` - Test for the City class docstring
-
-[/test_models/test_file_storage.py](/tests/test_models/test_file_storage.py) - Contains the TestFileStorageDocs class:
-
-- `def setUpClass(cls)` - Set up for the doc tests
-- `def test_pep8_conformance_file_storage(self)` - Test that models/file_storage.py conforms to PEP8
-- `def test_pep8_conformance_test_file_storage(self)` - Test that tests/test_models/test_file_storage.py conforms to PEP8
-- `def test_file_storage_module_docstring(self)` - Test for the file_storage.py module docstring
-- `def test_file_storage_class_docstring(self)` - Test for the FileStorage class docstring
-
-[/test_models/test_place.py](/tests/test_models/test_place.py) - Contains the TestPlaceDoc class:
-
-- `def setUpClass(cls)` - Set up for the doc tests
-- `def test_pep8_conformance_place(self)` - Test that models/place.py conforms to PEP8.
-- `def test_pep8_conformance_test_place(self)` - Test that tests/test_models/test_place.py conforms to PEP8.
-- `def test_place_module_docstring(self)` - Test for the place.py module docstring
-- `def test_place_class_docstring(self)` - Test for the Place class docstring
-
-[/test_models/test_review.py](/tests/test_models/test_review.py) - Contains the TestReviewDocs class:
-
-- `def setUpClass(cls)` - Set up for the doc tests
-- `def test_pep8_conformance_review(self)` - Test that models/review.py conforms to PEP8
-- `def test_pep8_conformance_test_review(self)` - Test that tests/test_models/test_review.py conforms to PEP8
-- `def test_review_module_docstring(self)` - Test for the review.py module docstring
-- `def test_review_class_docstring(self)` - Test for the Review class docstring
-
-[/test_models/state.py](/tests/test_models/test_state.py) - Contains the TestStateDocs class:
-
-- `def setUpClass(cls)` - Set up for the doc tests
-- `def test_pep8_conformance_state(self)` - Test that models/state.py conforms to PEP8
-- `def test_pep8_conformance_test_state(self)` - Test that tests/test_models/test_state.py conforms to PEP8
-- `def test_state_module_docstring(self)` - Test for the state.py module docstring
-- `def test_state_class_docstring(self)` - Test for the State class docstring
-
-[/test_models/user.py](/tests/test_models/test_user.py) - Contains the TestUserDocs class:
-
-- `def setUpClass(cls)` - Set up for the doc tests
-- `def test_pep8_conformance_user(self)` - Test that models/user.py conforms to PEP8
-- `def test_pep8_conformance_test_user(self)` - Test that tests/test_models/test_user.py conforms to PEP8
-- `def test_user_module_docstring(self)` - Test for the user.py module docstring
-- `def test_user_class_docstring(self)` - Test for the User class docstring
-
-## Examples of use
-
-```Bash
-vagrantAirBnB_clone$./console.py
-(hbnb) help
-
-Documented commands (type help <topic>):
-========================================
-EOF  all  create  destroy  help  quit  show  update
-
-(hbnb) all MyModel
-** class doesn't exist **
-(hbnb) create BaseModel
-7da56403-cc45-4f1c-ad32-bfafeb2bb050
-(hbnb) all BaseModel
-[[BaseModel] (7da56403-cc45-4f1c-ad32-bfafeb2bb050) {'updated_at': datetime.datetime(2017, 9, 28, 9, 50, 46, 772167), 'id': '7da56403-cc45-4f1c-ad32-bfafeb2bb050', 'created_at': datetime.datetime(2017, 9, 28, 9, 50, 46, 772123)}]
-(hbnb) show BaseModel 7da56403-cc45-4f1c-ad32-bfafeb2bb050
-[BaseModel] (7da56403-cc45-4f1c-ad32-bfafeb2bb050) {'updated_at': datetime.datetime(2017, 9, 28, 9, 50, 46, 772167), 'id': '7da56403-cc45-4f1c-ad32-bfafeb2bb050', 'created_at': datetime.datetime(2017, 9, 28, 9, 50, 46, 772123)}
-(hbnb) destroy BaseModel 7da56403-cc45-4f1c-ad32-bfafeb2bb050
-(hbnb) show BaseModel 7da56403-cc45-4f1c-ad32-bfafeb2bb050
-** no instance found **
-(hbnb) quit
+## Project Structure
+```plaintext
+AirBnB_clone_v4/
+├── api
+│   └── v1
+│       └── views
+│           └── documentation
+├── models
+│   └── engine
+├── tests
+│   └── test_models
+│       └── test_engine
+├── versions
+├── web_dynamic
+│   ├── static
+│   │   ├── images
+│   │   ├── scripts
+│   │   └── styles
+│   └── templates
+├── web_flask
+│   |
+│   ├── static
+│   │   ├── images
+│   │   └── styles
+│   └── templates
+└── web_static
+    ├── images
+    └── styles
 ```
 
 ## Bugs
