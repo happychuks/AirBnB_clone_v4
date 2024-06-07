@@ -178,6 +178,10 @@ No known bugs at this time.
 
 ## Authors
 
+AirBnb_clone_v4
+
+- Happy Felix Chukwuma - [Github](https://github.com/happychuks) / [Twitter](https://twitter.com/Chukwuma__Happy) / [LinkedIn](https://www.linkedin.com/in/happyfelixchukwuma/)
+
 AirBnb_clone_v3
 
 - Happy Felix Chukwuma - [Github](https://github.com/happychuks) / [Twitter](https://twitter.com/Chukwuma__Happy) / [LinkedIn](https://www.linkedin.com/in/happyfelixchukwuma)
